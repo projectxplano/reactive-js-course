@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
+
 
 class App extends Component {
   state ={
@@ -60,11 +60,7 @@ class App extends Component {
       border: '1px solid blue',
       font: 'inherit',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'      
     }
     let persons = (<div>
       <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
@@ -104,7 +100,7 @@ class App extends Component {
       styleClasses.push('bold');
     }
     return (
-      <StyleRoot>
+      
         <div className="App">       
           <h1 className="App-title">My first react app</h1>
           <p className={styleClasses.join(' ')}> "It is working" </p>
@@ -112,7 +108,7 @@ class App extends Component {
        
       </div>
 
-      </StyleRoot>
+      
       
     );
   }
@@ -120,4 +116,4 @@ class App extends Component {
 
 }
 
-export default Radium(App);
+export default App;
