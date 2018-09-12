@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person'
+import Person from './Person/Person';
+import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
   state ={
@@ -52,25 +53,27 @@ class App extends Component {
   }
 
   renderPersons = () => {
-    let persons = null;
-    if(this.state.showPersons){
-     /* persons = (<div>
-      <Person            
-       name={this.state.persons[0].name} 
-    age ={this.state.persons[0].age}
-    click = {this.handleClick.bind(this, 'Tiffany', 16, 0)}
-    changed = {this.handleChange.bind(this, 0)}
-    />
-    <Person 
-    name={this.state.persons[1].name} 
-    age ={this.state.persons[1].age}
-    click = {this.handleClick.bind(this, 'Matt', 14, 1)}
-    changed = {this.handleChange.bind(this, 1)}
-    />          
-      </div>) ;
-    */
+
+    const buttonStyle = {
+      backgroundColor: 'green',
+      color: 'white',
+      border: '1px solid blue',
+      font: 'inherit',
+      padding: '8px',
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+    }
+    let persons = (<div>
+      <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
+      </div>);
+    if(this.state.showPersons){     
     persons = (
+      
       <div>
+        <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
         {
           this.state.persons.map(
             (person, index) => {
@@ -83,50 +86,38 @@ class App extends Component {
         }
       </div>
       );
-    }  
-      
-    return persons;
+      buttonStyle.backgroundColor = 'red';
+
+    }
+     
+     
+     return persons;
   }
 
   render() {
+    //let styleClasses = ['red', 'bold'].join(' ');
+    let styleClasses = [];
+    if(this.state.persons.length <= 2){
+      styleClasses.push('red');
+    }
+    if(this.state.persons.length <= 1){
+      styleClasses.push('bold');
+    }
     return (
-      <div className="App">       
+      <StyleRoot>
+        <div className="App">       
           <h1 className="App-title">My first react app</h1>
-          <button onClick={this.togglePersons}>Toggle Persons</button>
+          <p className={styleClasses.join(' ')}> "It is working" </p>
           {this.renderPersons()}         
        
       </div>
+
+      </StyleRoot>
+      
     );
   }
 
-/*render() {
-    return (
-      <div className="App">       
-          <h1 className="App-title">My first react app</h1>
-          <button onClick={this.togglePersons}>Toggle Persons</button>
-          {
-            this.state.showPersons ?
-            <div>
-            <Person            
-             name={this.state.persons[0].name} 
-          age ={this.state.persons[0].age}
-          click = {this.handleClick.bind(this, 'Tiffany', 16, 0)}
-          changed = {this.handleChange.bind(this, 0)}
-          />
-          <Person 
-          name={this.state.persons[1].name} 
-          age ={this.state.persons[1].age}
-          click = {this.handleClick.bind(this, 'Matt', 14, 1)}
-          changed = {this.handleChange.bind(this, 1)}
-          />          
-          </div>  
-          : null          
-          }    
-          
-       
-      </div>
-    );
-  } */
+
 }
 
-export default App;
+export default Radium(App);
