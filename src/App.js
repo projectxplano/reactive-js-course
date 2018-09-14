@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
+
 
 
 class App extends Component {
@@ -53,23 +54,18 @@ class App extends Component {
   }
 
   renderPersons = () => {
+    
 
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      border: '1px solid blue',
-      font: 'inherit',
-      padding: '8px',
-      cursor: 'pointer'      
-    }
+    let buttonClass= '';
     let persons = (<div>
-      <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
+      <button className={buttonClass} onClick={this.togglePersons}>Toggle Persons</button>
       </div>);
-    if(this.state.showPersons){     
-    persons = (
-      
+    if(this.state.showPersons){  
+      buttonClass = classes.Red;   
+     persons = (
+     
       <div>
-        <button style={buttonStyle} onClick={this.togglePersons}>Toggle Persons</button>
+        <button className={buttonClass} onClick={this.togglePersons}>Toggle Persons</button>
         {
           this.state.persons.map(
             (person, index) => {
@@ -82,7 +78,7 @@ class App extends Component {
         }
       </div>
       );
-      buttonStyle.backgroundColor = 'red';
+      
 
     }
      
@@ -94,16 +90,20 @@ class App extends Component {
     //let styleClasses = ['red', 'bold'].join(' ');
     let styleClasses = [];
     if(this.state.persons.length <= 2){
-      styleClasses.push('red');
+      styleClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1){
-      styleClasses.push('bold');
+      styleClasses.push(classes.bold);
     }
+            
+   
+
+
     return (
       
-        <div className="App">       
+        <div className={classes.App}>       
           <h1 className="App-title">My first react app</h1>
-          <p className={styleClasses.join(' ')}> "It is working" </p>
+          <p className={styleClasses.join(' ')}> "It is working" </p>          
           {this.renderPersons()}         
        
       </div>
