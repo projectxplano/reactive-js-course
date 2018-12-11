@@ -7,19 +7,19 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state ={
-   persons : [{id: 'wew82145', name: 'Evan', age: 15},
+   persons : [
+    {id: 'wew82145', name: 'Evan', age: 15},
     {id:'yrw44882', name: 'Ivan', age: 18},
     {id:'uew83421', name: 'Tom', age: 14}
   ],
   showPersons: false
   }
+
   handleClick = (newName, newAge, index) =>{
     const newPerson = {name: newName, age: newAge};  
     const newPersons = [...this.state.persons ];
-    newPersons[index] = newPerson;
-    
+    newPersons[index] = newPerson;    
     this.setState({persons : newPersons});
-
   }
 
   handleDelete = (index) => {    
@@ -47,7 +47,6 @@ class App extends Component {
     newPersons[this.findIndexById(id)].name = event.target.value;
     this.setState({persons : newPersons});
   }
-
  
   render() {
     let persons = null;
@@ -61,6 +60,7 @@ class App extends Component {
     return (      
       <div className={classes.App}>       
           <Cockpit 
+          title={this.props.title}
           showPersons={this.state.showPersons}
           persons= {this.state.persons}
           clicked= {this.handleToggle} 
